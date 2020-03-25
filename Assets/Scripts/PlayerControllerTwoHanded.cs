@@ -40,8 +40,7 @@ public class PlayerControllerTwoHanded : MonoBehaviour
 
     void Shoot()
     {
-        //TODO: add object pool, this is inefficient
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
+        GameObject bullet = ObjectPooler.instance.SpawnFromPool(ObjectPooler.PoolType.Pellet, transform.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = shootDir * 20;
     }
 }

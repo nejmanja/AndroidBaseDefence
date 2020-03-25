@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1544964509548157210}
   - component: {fileID: 7387076596847408295}
   - component: {fileID: 5066818090886102514}
+  - component: {fileID: 1588634265065799591}
   m_Layer: 0
   m_Name: placeholderPellet
   m_TagString: Untagged
@@ -102,3 +103,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1588634265065799591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458476091003951667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3818d13463162ac418cf0dfa96592477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 2

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movementModeSwitcher : MonoBehaviour
+public class MovementModeSwitcher : MonoBehaviour
 {
     //Two handed mode items
     public Joystick shootJoystick;

@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
+    public enum PoolType
+    {
+        Pellet,
+        Bullet
+    }
+
     [System.Serializable]
     public class Pool
     {
-        public string tag;
+        public PoolType tag;
         public GameObject prefab;
         public int size;
     }
 
+    //TODO: Convert to either a true singleton or to a static class
     public static ObjectPooler instance;
     void Awake()
     {
@@ -20,13 +27,12 @@ public class ObjectPooler : MonoBehaviour
 
 
     public List<Pool> pools;
-    //TODO replace strings with enumerator
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
+    public Dictionary<PoolType, Queue<GameObject>> poolDictionary;
 
     // Start is called before the first frame update
     void Start()
     {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
 
         foreach (var pool in pools)
         {
@@ -43,7 +49,7 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(PoolType tag, Vector3 position, Quaternion rotation)
     {
         GameObject objToSpawn = poolDictionary[tag].Dequeue();
         objToSpawn.transform.position = position;
