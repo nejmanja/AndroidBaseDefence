@@ -6,16 +6,20 @@ public class PlayerControllerTwoHanded : MonoBehaviour
 {
     public FixedJoystick movementJoystick, shootJoystick;
     public Vector3 shootDir;
+    public float speed = 200f;
     private bool isShooting;
     public RangedWeapon currentWeapon;
     Coroutine lastRoutine = null;
-    void Update()
+    Rigidbody2D rb;
+
+    void Start()
     {
-        if (movementJoystick.Direction != Vector2.zero)
-        {
-            shootDir = shootJoystick.Direction;
-            transform.position += (Vector3)(movementJoystick.Direction / 10);
-        }
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void FixedUpdate()
+    {
+        rb.velocity = movementJoystick.Direction * speed * Time.deltaTime;
 
         if(shootJoystick.Direction != Vector2.zero)
         {

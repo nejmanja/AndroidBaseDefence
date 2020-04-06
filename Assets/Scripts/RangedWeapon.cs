@@ -31,6 +31,7 @@ public class RangedWeapon : MonoBehaviour
             {
                 GameObject bullet = ObjectPooler.instance.SpawnFromPool(ObjectPooler.PoolType.Pellet, transform.position, Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = transform.right * 20;
+                bullet.GetComponent<ProjectileController>().damage = damage;
                 yield return new WaitForSeconds(fireDelay);
 
             }

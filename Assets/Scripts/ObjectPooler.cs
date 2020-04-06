@@ -7,7 +7,7 @@ public class ObjectPooler : MonoBehaviour
     public enum PoolType
     {
         Pellet,
-        Bullet
+        EnemyMinion
     }
 
     [System.Serializable]
