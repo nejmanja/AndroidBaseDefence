@@ -6,10 +6,9 @@ public class PlayerControllerTwoHanded : MonoBehaviour
 {
     public FixedJoystick movementJoystick, shootJoystick;
     public Vector3 shootDir;
-    public float shootRate;
-    public GameObject bulletPrefab;
-
     private bool isShooting;
+    public RangedWeapon currentWeapon;
+    Coroutine lastRoutine = null;
     void Update()
     {
         if (movementJoystick.Direction != Vector2.zero)
@@ -21,26 +20,21 @@ public class PlayerControllerTwoHanded : MonoBehaviour
         if(shootJoystick.Direction != Vector2.zero)
         {
             shootDir = shootJoystick.Direction.normalized;
+            currentWeapon.transform.right = shootDir;
             Debug.DrawRay(transform.position, shootDir, Color.red);
             if (!isShooting)
             {
-                InvokeRepeating("Shoot", 0, shootRate);
                 isShooting = true;
+                lastRoutine = currentWeapon.StartCoroutine(currentWeapon.Shoot());
             }
         }
         else
         {
             if(isShooting)
             {
-                CancelInvoke("Shoot");
+                currentWeapon.StopCoroutine(lastRoutine);
                 isShooting = false;
             }
         }
-    }
-
-    void Shoot()
-    {
-        GameObject bullet = ObjectPooler.instance.SpawnFromPool(ObjectPooler.PoolType.Pellet, transform.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().velocity = shootDir * 20;
     }
 }
